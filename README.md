@@ -1,2 +1,4 @@
 # worststats
-Re-implementing the wheel, one function at a time.
+
+“What I cannot create, I do not understand.”
+― Richard P. Feynman

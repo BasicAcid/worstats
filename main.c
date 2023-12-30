@@ -28,7 +28,8 @@ mean(struct DynamicArray arr)
 {
     double sum = 0;
 
-    for (size_t i = 0; i < arr.size; ++i) {
+    for(size_t i = 0; i < arr.size; ++i)
+    {
         sum += arr.data[i];
     }
 
@@ -37,19 +38,33 @@ mean(struct DynamicArray arr)
     return mean;
 }
 
-/* float */
-/* variance(float array[]) */
-/* { */
-/*     int size = sizeof(array) / sizeof(array[0]); */
-/*     float array_mean = mean(array); */
-/*     float result; */
+double
+sample_variance(struct DynamicArray arr)
+{
+    double array_mean = mean(arr);
+    double result = 0;
 
-/*     for (int i = 0; i < size; i++) { */
-/*         result += (array[i] - array_mean)**2; */
-/*     } */
+    for(size_t i = 0; i < arr.size; i++)
+    {
+        result += pow(arr.data[i] - array_mean, 2);
+    }
 
-/*     return result / size; */
-/* } */
+    return result / (double)(arr.size - 1);
+}
+
+double
+population_variance(struct DynamicArray arr)
+{
+    double array_mean = mean(arr);
+    double result = 0;
+
+    for(size_t i = 0; i < arr.size; i++)
+    {
+        result += pow(arr.data[i] - array_mean, 2);
+    }
+
+    return result / (double)arr.size;
+}
 
 /* float */
 /* standard_deviation(float array[]) */
@@ -60,21 +75,23 @@ mean(struct DynamicArray arr)
 int
 main()
 {
-    size_t initialSize = 10;
+    size_t initialSize = 5;
 
     struct DynamicArray my_array = create_dynamic_array(initialSize);
 
     for (size_t i = 0; i < my_array.size; ++i) {
-        my_array.data[i] = 40 * (double)i;
+        my_array.data[i] = 2 * (double)i;
     }
 
     for (size_t i = 0; i < my_array.size; ++i) {
         printf("%f\n", my_array.data[i]);
     }
 
-    double test = mean(my_array);
+    double test_mean = mean(my_array);
+    printf("%f\n", test_mean);
 
-    printf("%f\n", test);
+    double test_variance = sample_variance(my_array);
+    printf("%f\n", test_variance);
 
     free_dynamic_array(&my_array);
 

@@ -30,3 +30,6 @@ deploy: $(INSTALL_DIR)/tagger
 
 $(INSTALL_DIR)/tagger: $(SRC)
 	$(CC) $(CFLAGS) -o $@ $^
+
+run: build
+	$(TARGET)

@@ -1,45 +1,78 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
-float
-mean(float array[])
-{
-    int size = sizeof(array) / sizeof(array[0]);
-    float sum = 0.0;
+struct DynamicArray {
+    double *data;
+    size_t size;
+};
 
-    for (int i = 0; i < size; i++) {
-        sum += array[i];
+struct DynamicArray
+create_dynamic_array(size_t size)
+{
+    struct DynamicArray arr;
+    arr.data = (double *)malloc(size * sizeof(double));
+    arr.size = size;
+    return arr;
+}
+
+void
+free_dynamic_array(struct DynamicArray *arr)
+{
+    free(arr->data);
+    arr->size = 0;
+}
+
+double
+mean(struct DynamicArray array)
+{
+    double sum = 0;
+
+    for (size_t i = 0; i < array.size; ++i) {
+        sum += array.data[i];
     }
 
-    return sum/size;
+    double mean = sum / (double)array.size;
+
+    return mean;
 }
 
-float
-variance(float array[])
-{
-    int size = sizeof(array) / sizeof(array[0]);
-    float array_mean = mean(array);
-    float result;
+/* float */
+/* variance(float array[]) */
+/* { */
+/*     int size = sizeof(array) / sizeof(array[0]); */
+/*     float array_mean = mean(array); */
+/*     float result; */
 
-    for (int i = 0; i < size; i++) {
-        result += (array[i] - array_mean)**2;
+/*     for (int i = 0; i < size; i++) { */
+/*         result += (array[i] - array_mean)**2; */
+/*     } */
+
+/*     return result / size; */
+/* } */
+
+/* float */
+/* standard_deviation(float array[]) */
+/* { */
+/*     return sqrt(variance(array)); */
+/* } */
+
+int
+main()
+{
+    size_t initialSize = 10;
+
+    struct DynamicArray myArray = create_dynamic_array(initialSize);
+
+    for (size_t i = 0; i < myArray.size; ++i) {
+        myArray.data[i] = 2.303984 * (double)i;
     }
 
-    return result / size;
-}
+    for (size_t i = 0; i < myArray.size; ++i) {
+        printf("%f\n", myArray.data[i]);
+    }
 
-float
-standard_deviation(float array[])
-{
-    return sqrt(variance(array));
-}
+    free_dynamic_array(&myArray);
 
-
-
-int main()
-{
-    float my_array[] = {2, 8, 4, 12};
-
-    mean(my_array, arraySize);
     return 0;
 }

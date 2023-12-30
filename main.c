@@ -24,15 +24,15 @@ free_dynamic_array(struct DynamicArray *arr)
 }
 
 double
-mean(struct DynamicArray array)
+mean(struct DynamicArray arr)
 {
     double sum = 0;
 
-    for (size_t i = 0; i < array.size; ++i) {
-        sum += array.data[i];
+    for (size_t i = 0; i < arr.size; ++i) {
+        sum += arr.data[i];
     }
 
-    double mean = sum / (double)array.size;
+    double mean = sum / (double)arr.size;
 
     return mean;
 }
@@ -62,17 +62,21 @@ main()
 {
     size_t initialSize = 10;
 
-    struct DynamicArray myArray = create_dynamic_array(initialSize);
+    struct DynamicArray my_array = create_dynamic_array(initialSize);
 
-    for (size_t i = 0; i < myArray.size; ++i) {
-        myArray.data[i] = 2.303984 * (double)i;
+    for (size_t i = 0; i < my_array.size; ++i) {
+        my_array.data[i] = 40 * (double)i;
     }
 
-    for (size_t i = 0; i < myArray.size; ++i) {
-        printf("%f\n", myArray.data[i]);
+    for (size_t i = 0; i < my_array.size; ++i) {
+        printf("%f\n", my_array.data[i]);
     }
 
-    free_dynamic_array(&myArray);
+    double test = mean(my_array);
+
+    printf("%f\n", test);
+
+    free_dynamic_array(&my_array);
 
     return 0;
 }

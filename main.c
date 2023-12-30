@@ -66,11 +66,11 @@ population_variance(struct DynamicArray arr)
     return result / (double)arr.size;
 }
 
-/* float */
-/* standard_deviation(float array[]) */
-/* { */
-/*     return sqrt(variance(array)); */
-/* } */
+double
+standard_deviation(struct DynamicArray arr)
+{
+    return sqrt(population_variance(arr));
+}
 
 int
 main()
@@ -87,11 +87,14 @@ main()
         printf("%f\n", my_array.data[i]);
     }
 
-    double test_mean = mean(my_array);
-    printf("%f\n", test_mean);
+    /* double test_mean = mean(my_array); */
+    /* printf("%f\n", test_mean); */
 
-    double test_variance = sample_variance(my_array);
-    printf("%f\n", test_variance);
+    /* double test_variance = sample_variance(my_array); */
+    /* printf("%f\n", test_variance); */
+
+    double test_std = standard_deviation(my_array);
+    printf("%f\n", test_std);
 
     free_dynamic_array(&my_array);
 

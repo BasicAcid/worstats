@@ -1,4 +1,5 @@
 CC := gcc
+
 CFLAGS := -O2 \
           -Wall \
           -Wextra \
@@ -12,6 +13,8 @@ CFLAGS := -O2 \
           -z noexecstack \
           -Wconversion
 
+LIBS = -lm
+
 SRC := main.c
 TARGET := bin/main
 INSTALL_DIR := ~/.local/bin
@@ -24,7 +27,7 @@ create_dir:
 	mkdir -p bin
 
 $(TARGET): $(SRC)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 deploy: $(INSTALL_DIR)/tagger
 

@@ -56,11 +56,11 @@ variance(struct DynamicArray arr, enum VarianceType type)
         result += pow(arr.data[i] - array_mean, 2);
     }
 
-    if (type == SAMPLE)
+    if(type == SAMPLE)
     {
         return result / (double)(arr.size - 1);
     }
-    else if (type == POPULATION)
+    else if(type == POPULATION)
     {
         return result / (double)arr.size;
     }
@@ -78,7 +78,7 @@ standard_deviation(struct DynamicArray arr, enum VarianceType type)
     {
         return sqrt(variance(arr, SAMPLE));;
     }
-    else if (type == POPULATION)
+    else if(type == POPULATION)
     {
         return sqrt(variance(arr, POPULATION));;
     }
@@ -96,7 +96,7 @@ main()
 
     struct DynamicArray my_array = create_dynamic_array(initialSize);
 
-    for (size_t i = 0; i < my_array.size; ++i) {
+    for(size_t i = 0; i < my_array.size; ++i) {
         my_array.data[i] = 2 * (double)i;
     }
 

@@ -2,9 +2,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-struct DynamicArray {
+struct DynamicArray
+{
     double *data;
     size_t size;
+};
+
+enum VarianceType
+{
+    SAMPLE,
+    POPULATION
 };
 
 struct DynamicArray
@@ -39,6 +46,32 @@ mean(struct DynamicArray arr)
 }
 
 double
+variance(struct DynamicArray arr, enum VarianceType type)
+{
+    double array_mean = mean(arr);
+    double result = 0;
+
+    for(size_t i = 0; i < arr.size; i++)
+    {
+        result += pow(arr.data[i] - array_mean, 2);
+    }
+
+    if (type == SAMPLE)
+    {
+        return result / (double)(arr.size - 1);
+    }
+    else if (type == POPULATION)
+    {
+        return result / (double)arr.size;
+    }
+    else
+    {
+        fprintf(stderr, "Invalid variance type\n");
+        exit(EXIT_FAILURE);
+    }
+}
+
+double
 sample_variance(struct DynamicArray arr)
 {
     double array_mean = mean(arr);
@@ -66,6 +99,8 @@ population_variance(struct DynamicArray arr)
     return result / (double)arr.size;
 }
 
+
+
 double
 standard_deviation(struct DynamicArray arr)
 {
@@ -83,18 +118,21 @@ main()
         my_array.data[i] = 2 * (double)i;
     }
 
-    for (size_t i = 0; i < my_array.size; ++i) {
-        printf("%f\n", my_array.data[i]);
-    }
+    /* for (size_t i = 0; i < my_array.size; ++i) { */
+    /*     printf("%f\n", my_array.data[i]); */
+    /* } */
 
     /* double test_mean = mean(my_array); */
     /* printf("%f\n", test_mean); */
 
-    /* double test_variance = sample_variance(my_array); */
-    /* printf("%f\n", test_variance); */
+    double s_variance = variance(my_array, SAMPLE);
+    printf("%f\n", s_variance);
 
-    double test_std = standard_deviation(my_array);
-    printf("%f\n", test_std);
+    double p_variance = variance(my_array, POPULATION);
+    printf("%f\n", p_variance);
+
+    /* double test_std = standard_deviation(my_array); */
+    /* printf("%f\n", test_std); */
 
     free_dynamic_array(&my_array);
 

@@ -24,6 +24,15 @@ create_dynamic_array(size_t size)
 }
 
 void
+print_dynamic_array(struct DynamicArray arr)
+{
+    for(size_t i = 0; i < arr.size; i++)
+    {
+        printf("%f\n", arr.data[i]);
+    }
+}
+
+void
 free_dynamic_array(struct DynamicArray *arr)
 {
     free(arr->data);
@@ -89,10 +98,45 @@ standard_deviation(struct DynamicArray arr, enum VarianceType type)
     }
 }
 
+struct DynamicArray
+merge_sort(struct DynamicArray arr)
+{
+    size_t midpoint = arr.size / 2;
+    // To round the mid value up:
+    //size_t midpoint = (arr.size + (2 - 1)) / 2;
+
+    size_t part1_size = midpoint;
+    size_t part2_size = arr.size - midpoint;
+
+    struct DynamicArray part1 = create_dynamic_array(part1_size);
+    struct DynamicArray part2 = create_dynamic_array(part2_size);;
+
+    struct DynamicArray result;
+
+    for(size_t i = 0; i < part1_size; i++)
+    {
+        part1.data[i] = arr.data[i];
+    }
+
+    for(size_t i = 0; i < part2_size; i++)
+    {
+        part2.data[i] = arr.data[midpoint + i];
+    }
+
+    print_dynamic_array(arr);
+
+    printf("part1\n");
+    print_dynamic_array(part1);
+    printf("part2\n");
+    print_dynamic_array(part2);
+
+    return result;
+}
+
 int
 main()
 {
-    size_t initialSize = 5;
+    size_t initialSize = 9;
 
     struct DynamicArray my_array = create_dynamic_array(initialSize);
 
@@ -107,17 +151,23 @@ main()
     /* double test_mean = mean(my_array); */
     /* printf("%f\n", test_mean); */
 
-    double s_variance = variance(my_array, SAMPLE);
-    printf("%f\n", s_variance);
+    /* double s_variance = variance(my_array, SAMPLE); */
+    /* printf("%f\n", s_variance); */
 
-    double p_variance = variance(my_array, POPULATION);
-    printf("%f\n", p_variance);
+    /* double p_variance = variance(my_array, POPULATION); */
+    /* printf("%f\n", p_variance); */
 
-    double test_std_sample = standard_deviation(my_array, SAMPLE);
-    printf("%f\n", test_std_sample);
+    /* double test_std_sample = standard_deviation(my_array, SAMPLE); */
+    /* printf("%f\n", test_std_sample); */
 
-    double test_std_pop = standard_deviation(my_array, POPULATION);
-    printf("%f\n", test_std_pop);
+    /* double test_std_pop = standard_deviation(my_array, POPULATION); */
+    /* printf("%f\n", test_std_pop); */
+
+
+    struct DynamicArray a = merge_sort(my_array);
+
+
+
 
     free_dynamic_array(&my_array);
 

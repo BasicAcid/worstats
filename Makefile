@@ -11,7 +11,8 @@ CFLAGS := -O2 \
           -Wundef \
           -fno-common \
           -z noexecstack \
-          -Wconversion
+          -Wconversion \
+          -g
 
 LIBS = -lm
 
@@ -36,3 +37,9 @@ $(INSTALL_DIR)/tagger: $(SRC)
 
 run: build
 	$(TARGET)
+
+cppcheck:
+	cppcheck --enable=all --inconclusive --force --suppress=unusedFunction .
+
+valgrind:
+	 valgrind --tool=memcheck --leak-check=full --show-reachable=yes --num-callers=20 -s --track-fds=yes  --track-origins=yes ./bin/main

@@ -136,15 +136,15 @@ merge(double arr[], size_t left, size_t middle, size_t right)
     size_t n1 = middle - left + 1;
     size_t n2 = right - middle;
 
-    double L[n1], R[n2]; // Temp arrays.
+    double temp_left[n1], temp_right[n2]; // Temp arrays.
 
-    // Copy data to temporary array L[].
+    // Copy data to temporary array temp_left[].
     for(i = 0; i < n1; i++)
-        L[i] = arr[left + i];
+        temp_left[i] = arr[left + i];
 
-    // Copy data to temporary array R[].
+    // Copy data to temporary array temp_right[].
     for(j = 0; j < n2; j++)
-        R[j] = arr[middle + 1 + j];
+        temp_right[j] = arr[middle + 1 + j];
 
     // Merge the temporary arrays back into arr[left..right].
     i = 0; // Initial index of first subarray.
@@ -153,31 +153,31 @@ merge(double arr[], size_t left, size_t middle, size_t right)
 
     while (i < n1 && j < n2)
     {
-        if (L[i] <= R[j])
+        if (temp_left[i] <= temp_right[j])
         {
-            arr[k] = L[i];
+            arr[k] = temp_left[i];
             i++;
         }
         else
         {
-            arr[k] = R[j];
+            arr[k] = temp_right[j];
             j++;
         }
         k++;
     }
 
-    // Copy the remaining elements of L[].
+    // Copy the remaining elements of temp_left[].
     while (i < n1)
     {
-        arr[k] = L[i];
+        arr[k] = temp_left[i];
         i++;
         k++;
     }
 
-    // Copy the remaining elements of R[].
+    // Copy the remaining elements of temp_right[].
     while (j < n2)
     {
-        arr[k] = R[j];
+        arr[k] = temp_right[j];
         j++;
         k++;
     }
@@ -196,7 +196,10 @@ merge_sort(double arr[], size_t left, size_t right)
         size_t middle = (left + right) / 2;
 
         // Sort halves.
+        printf("merge_sort: left: %d, middle: %d\n", (int)left, (int)middle);
         merge_sort(arr, left, middle);
+
+        printf("merge_sort: middle+1: %d, right: %d\n", (int)middle+1, (int)right);
         merge_sort(arr, middle + 1, right);
 
         merge(arr, left, middle, right);

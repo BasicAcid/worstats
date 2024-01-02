@@ -98,51 +98,134 @@ standard_deviation(struct DynamicArray arr, enum VarianceType type)
     }
 }
 
-struct DynamicArray
-merge_sort(struct DynamicArray arr)
+/* void */
+/* split_merge_sort(struct DynamicArray arr) */
+/* { */
+/*     size_t midpoint = arr.size / 2; */
+/*     // To round the mid value up: */
+/*     //size_t midpoint = (arr.size + (2 - 1)) / 2; */
+
+/*     size_t part1_size = midpoint; */
+/*     size_t part2_size = arr.size - midpoint; */
+
+/*     struct DynamicArray part1 = create_dynamic_array(part1_size); */
+/*     struct DynamicArray part2 = create_dynamic_array(part2_size);; */
+
+/*     for(size_t i = 0; i < part1_size; i++) */
+/*     { */
+/*         part1.data[i] = arr.data[i]; */
+/*     } */
+
+/*     for(size_t i = 0; i < part2_size; i++) */
+/*     { */
+/*         part2.data[i] = arr.data[midpoint + i]; */
+/*     } */
+
+/*     print_dynamic_array(arr); */
+
+/*     printf("part1\n"); */
+/*     print_dynamic_array(part1); */
+/*     printf("part2\n"); */
+/*     print_dynamic_array(part2); */
+/* } */
+
+void
+merge(double arr[], size_t left, size_t middle, size_t right)
 {
-    size_t midpoint = arr.size / 2;
-    // To round the mid value up:
-    //size_t midpoint = (arr.size + (2 - 1)) / 2;
+    size_t i, j, k;
+    size_t n1 = middle - left + 1;
+    size_t n2 = right - middle;
 
-    size_t part1_size = midpoint;
-    size_t part2_size = arr.size - midpoint;
+    double L[n1], R[n2]; // Temp arrays.
 
-    struct DynamicArray part1 = create_dynamic_array(part1_size);
-    struct DynamicArray part2 = create_dynamic_array(part2_size);;
+    // Copy data to temporary array L[].
+    for(i = 0; i < n1; i++)
+        L[i] = arr[left + i];
 
-    struct DynamicArray result;
+    // Copy data to temporary array R[].
+    for(j = 0; j < n2; j++)
+        R[j] = arr[middle + 1 + j];
 
-    for(size_t i = 0; i < part1_size; i++)
+    // Merge the temporary arrays back into arr[left..right].
+    i = 0; // Initial index of first subarray.
+    j = 0; // Initial index of second subarray.
+    k = left; // Initial index of merged subarray.
+
+    while (i < n1 && j < n2)
     {
-        part1.data[i] = arr.data[i];
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
     }
 
-    for(size_t i = 0; i < part2_size; i++)
+    // Copy the remaining elements of L[].
+    while (i < n1)
     {
-        part2.data[i] = arr.data[midpoint + i];
+        arr[k] = L[i];
+        i++;
+        k++;
     }
 
-    print_dynamic_array(arr);
+    // Copy the remaining elements of R[].
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
 
-    printf("part1\n");
-    print_dynamic_array(part1);
-    printf("part2\n");
-    print_dynamic_array(part2);
+void
+merge_sort(double arr[], size_t left, size_t right)
+{
+    /* printf("Left: %d\n", (int)left); */
+    /* printf("Right: %d\n", (int)right); */
 
-    return result;
+    if(left < right)
+    {
+        // Better?
+        // size_t middle = left + (right - left) / 2;
+        size_t middle = (left + right) / 2;
+
+        // Sort halves.
+        merge_sort(arr, left, middle);
+        merge_sort(arr, middle + 1, right);
+
+        merge(arr, left, middle, right);
+    }
+}
+
+void
+merge_sort_dynamic(struct DynamicArray *arr)
+{
+    if(arr->size > 1)
+        merge_sort(arr->data, 0, arr->size - 1);
 }
 
 int
 main()
 {
-    size_t initialSize = 9;
+    size_t initialSize = 5;
 
     struct DynamicArray my_array = create_dynamic_array(initialSize);
 
-    for(size_t i = 0; i < my_array.size; ++i) {
-        my_array.data[i] = 2 * (double)i;
-    }
+    /* for(size_t i = 0; i < my_array.size; ++i) { */
+    /*     my_array.data[i] = 2 * (double)i; */
+    /* } */
+
+    my_array.data[0] = 4;
+    my_array.data[1] = 3;
+    my_array.data[2] = 39;
+    my_array.data[3] = 2;
+    my_array.data[4] = 9;
 
     /* for (size_t i = 0; i < my_array.size; ++i) { */
     /*     printf("%f\n", my_array.data[i]); */
@@ -164,10 +247,10 @@ main()
     /* printf("%f\n", test_std_pop); */
 
 
-    struct DynamicArray a = merge_sort(my_array);
+    //split_merge_sort(my_array);
+    merge_sort_dynamic(&my_array);
 
-
-
+    print_dynamic_array(my_array);
 
     free_dynamic_array(&my_array);
 

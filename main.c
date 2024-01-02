@@ -132,26 +132,28 @@ standard_deviation(struct DynamicArray arr, enum VarianceType type)
 void
 merge(double arr[], size_t left, size_t middle, size_t right)
 {
-    size_t i, j, k;
-    size_t n1 = middle - left + 1;
-    size_t n2 = right - middle;
+    printf("merge: left: %d, middle: %d, right: %d\n", (int)left, (int)middle, (int)right);
 
-    double temp_left[n1], temp_right[n2]; // Temp arrays.
+    size_t left_half_size = middle - left + 1;
+    size_t right_half_size = right - middle;
+
+    double temp_left[left_half_size];
+    double temp_right[right_half_size];
 
     // Copy data to temporary array temp_left[].
-    for(i = 0; i < n1; i++)
+    for(size_t i = 0; i < left_half_size; i++)
         temp_left[i] = arr[left + i];
 
     // Copy data to temporary array temp_right[].
-    for(j = 0; j < n2; j++)
+    for(size_t j = 0; j < right_half_size; j++)
         temp_right[j] = arr[middle + 1 + j];
 
     // Merge the temporary arrays back into arr[left..right].
-    i = 0; // Initial index of first subarray.
-    j = 0; // Initial index of second subarray.
-    k = left; // Initial index of merged subarray.
+    size_t i = 0; // First subarray index.
+    size_t j = 0; // Second subarray index.
+    size_t k = left; // Merged subarray index.
 
-    while (i < n1 && j < n2)
+    while(i < left_half_size && j < right_half_size)
     {
         if (temp_left[i] <= temp_right[j])
         {
@@ -167,7 +169,7 @@ merge(double arr[], size_t left, size_t middle, size_t right)
     }
 
     // Copy the remaining elements of temp_left[].
-    while (i < n1)
+    while(i < left_half_size)
     {
         arr[k] = temp_left[i];
         i++;
@@ -175,7 +177,7 @@ merge(double arr[], size_t left, size_t middle, size_t right)
     }
 
     // Copy the remaining elements of temp_right[].
-    while (j < n2)
+    while(j < right_half_size)
     {
         arr[k] = temp_right[j];
         j++;

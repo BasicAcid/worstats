@@ -45,9 +45,7 @@ mean(struct DynamicArray arr)
     double sum = 0;
 
     for(size_t i = 0; i < arr.size; ++i)
-    {
         sum += arr.data[i];
-    }
 
     double mean = sum / (double)arr.size;
 
@@ -202,7 +200,12 @@ median(struct DynamicArray arr)
 double
 covariance(struct DynamicArray arr1, struct DynamicArray arr2)
 {
-    // TODO: Check that sizes are equal!
+    if(arr1.size != arr2.size)
+    {
+        fprintf(stderr, "Covariance error: Arrays are not of equal size:\n");
+        fprintf(stderr, "arr1: %d, arr2: %d\n", (int)arr1.size, (int)arr2.size);
+        exit(EXIT_FAILURE);
+    }
 
     double mean_arr1 = mean(arr1);
     double mean_arr2 = mean(arr2);

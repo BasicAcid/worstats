@@ -101,7 +101,7 @@ standard_deviation(struct DynamicArray arr, enum VarianceType type)
 void
 merge(double arr[], size_t left, size_t middle, size_t right)
 {
-    printf("merge: left: %d, middle: %d, right: %d\n", (int)left, (int)middle, (int)right);
+    //printf("merge: left: %d, middle: %d, right: %d\n", (int)left, (int)middle, (int)right);
 
     size_t left_half_size = middle - left + 1;
     size_t right_half_size = right - middle;
@@ -167,10 +167,10 @@ merge_sort(double arr[], size_t left, size_t right)
         size_t middle = (left + right) / 2;
 
         // Sort halves.
-        printf("merge_sort: left: %d, middle: %d\n", (int)left, (int)middle);
+        //printf("merge_sort: left: %d, middle: %d\n", (int)left, (int)middle);
         merge_sort(arr, left, middle);
 
-        printf("merge_sort: middle+1: %d, right: %d\n", (int)middle+1, (int)right);
+        //printf("merge_sort: middle+1: %d, right: %d\n", (int)middle+1, (int)right);
         merge_sort(arr, middle + 1, right);
 
         merge(arr, left, middle, right);
@@ -184,10 +184,18 @@ merge_sort_dynamic(struct DynamicArray *arr)
         merge_sort(arr->data, 0, arr->size - 1);
 }
 
+// Unfinished, need to make to even case different.
+double
+median(struct DynamicArray arr)
+{
+    merge_sort_dynamic(&arr);
+    return arr.data[arr.size / 2];
+}
+
 int
 main()
 {
-    size_t initialSize = 5;
+    size_t initialSize = 6;
 
     struct DynamicArray my_array = create_dynamic_array(initialSize);
 
@@ -195,11 +203,12 @@ main()
     /*     my_array.data[i] = 2 * (double)i; */
     /* } */
 
-    my_array.data[0] = 4;
-    my_array.data[1] = 3;
-    my_array.data[2] = 39;
+    my_array.data[0] = -6;
+    my_array.data[1] = 1;
+    my_array.data[2] = -8;
     my_array.data[3] = 2;
-    my_array.data[4] = 9;
+    my_array.data[4] = 3;
+    my_array.data[5] = 6;
 
     /* for (size_t i = 0; i < my_array.size; ++i) { */
     /*     printf("%f\n", my_array.data[i]); */
@@ -222,9 +231,12 @@ main()
 
 
     //split_merge_sort(my_array);
-    merge_sort_dynamic(&my_array);
 
-    print_dynamic_array(my_array);
+    //merge_sort_dynamic(&my_array);
+
+    //print_dynamic_array(my_array);
+
+    printf("%f\n", median(my_array));
 
     free_dynamic_array(&my_array);
 

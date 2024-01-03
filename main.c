@@ -98,37 +98,6 @@ standard_deviation(struct DynamicArray arr, enum VarianceType type)
     }
 }
 
-/* void */
-/* split_merge_sort(struct DynamicArray arr) */
-/* { */
-/*     size_t midpoint = arr.size / 2; */
-/*     // To round the mid value up: */
-/*     //size_t midpoint = (arr.size + (2 - 1)) / 2; */
-
-/*     size_t part1_size = midpoint; */
-/*     size_t part2_size = arr.size - midpoint; */
-
-/*     struct DynamicArray part1 = create_dynamic_array(part1_size); */
-/*     struct DynamicArray part2 = create_dynamic_array(part2_size);; */
-
-/*     for(size_t i = 0; i < part1_size; i++) */
-/*     { */
-/*         part1.data[i] = arr.data[i]; */
-/*     } */
-
-/*     for(size_t i = 0; i < part2_size; i++) */
-/*     { */
-/*         part2.data[i] = arr.data[midpoint + i]; */
-/*     } */
-
-/*     print_dynamic_array(arr); */
-
-/*     printf("part1\n"); */
-/*     print_dynamic_array(part1); */
-/*     printf("part2\n"); */
-/*     print_dynamic_array(part2); */
-/* } */
-
 void
 merge(double arr[], size_t left, size_t middle, size_t right)
 {

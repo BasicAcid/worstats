@@ -184,30 +184,36 @@ merge_sort_dynamic(struct DynamicArray *arr)
         merge_sort(arr->data, 0, arr->size - 1);
 }
 
-// Unfinished, need to make to even case different.
 double
 median(struct DynamicArray arr)
 {
+    // Full sorting is probably not necessary,
+    // as we may need only the middle elements.
     merge_sort_dynamic(&arr);
+
+    // If even size.
+    if(!(arr.size % 2))
+        return (arr.data[(arr.size / 2) - 1] + arr.data[arr.size / 2]) / 2;
+
+    // If odd size.
     return arr.data[arr.size / 2];
 }
 
 int
 main()
 {
-    size_t initialSize = 6;
-
-    struct DynamicArray my_array = create_dynamic_array(initialSize);
+    size_t initial_size = 6;
+    struct DynamicArray my_array = create_dynamic_array(initial_size);
 
     /* for(size_t i = 0; i < my_array.size; ++i) { */
     /*     my_array.data[i] = 2 * (double)i; */
     /* } */
 
-    my_array.data[0] = -6;
-    my_array.data[1] = 1;
-    my_array.data[2] = -8;
-    my_array.data[3] = 2;
-    my_array.data[4] = 3;
+    my_array.data[0] = 1;
+    my_array.data[1] = 2;
+    my_array.data[2] = 3;
+    my_array.data[3] = 4;
+    my_array.data[4] = 5;
     my_array.data[5] = 6;
 
     /* for (size_t i = 0; i < my_array.size; ++i) { */

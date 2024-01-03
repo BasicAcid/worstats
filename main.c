@@ -199,20 +199,9 @@ median(struct DynamicArray arr)
     return arr.data[arr.size / 2];
 }
 
-/* double */
-/* expected_value(struct DynamicArray arr) */
-/* { */
-/*     double result = 0; */
-
-/*     for(size_t i = 0; i < arr1.size; ++i) { */
-/*         result += (arr1.data[i] - mean_arr1) * (arr2.data[i] - mean_arr2); */
-/*     } */
-/* } */
-
 double
 covariance(struct DynamicArray arr1, struct DynamicArray arr2)
 {
-
     // TODO: Check that sizes are equal!
 
     double mean_arr1 = mean(arr1);
@@ -220,10 +209,7 @@ covariance(struct DynamicArray arr1, struct DynamicArray arr2)
 
     double result = 0;
 
-    //printf("%d\n",(int) arr1.size);
-
     for(size_t i = 0; i < arr1.size; ++i) {
-        //printf("%d\n", i);
         result += (arr1.data[i] - mean_arr1) * (arr2.data[i] - mean_arr2);
     }
 

@@ -199,15 +199,45 @@ median(struct DynamicArray arr)
     return arr.data[arr.size / 2];
 }
 
+/* double */
+/* expected_value(struct DynamicArray arr) */
+/* { */
+/*     double result = 0; */
+
+/*     for(size_t i = 0; i < arr1.size; ++i) { */
+/*         result += (arr1.data[i] - mean_arr1) * (arr2.data[i] - mean_arr2); */
+/*     } */
+/* } */
+
+double
+covariance(struct DynamicArray arr1, struct DynamicArray arr2)
+{
+
+    // TODO: Check that sizes are equal!
+
+    double mean_arr1 = mean(arr1);
+    double mean_arr2 = mean(arr2);
+
+    double result = 0;
+
+    //printf("%d\n",(int) arr1.size);
+
+    for(size_t i = 0; i < arr1.size; ++i) {
+        //printf("%d\n", i);
+        result += (arr1.data[i] - mean_arr1) * (arr2.data[i] - mean_arr2);
+    }
+
+    // TODO:
+    // This is for sample covariance, implement the enum flag to switch with population.
+    return result / (double)(arr1.size - 1);
+}
+
 int
 main()
 {
     size_t initial_size = 6;
     struct DynamicArray my_array = create_dynamic_array(initial_size);
-
-    /* for(size_t i = 0; i < my_array.size; ++i) { */
-    /*     my_array.data[i] = 2 * (double)i; */
-    /* } */
+    struct DynamicArray my_array2 = create_dynamic_array(initial_size);
 
     my_array.data[0] = 1;
     my_array.data[1] = 2;
@@ -215,6 +245,13 @@ main()
     my_array.data[3] = 4;
     my_array.data[4] = 5;
     my_array.data[5] = 6;
+
+    my_array2.data[0] = 1;
+    my_array2.data[1] = 2;
+    my_array2.data[2] = 3;
+    my_array2.data[3] = 4;
+    my_array2.data[4] = 5;
+    my_array2.data[5] = 53;
 
     /* for (size_t i = 0; i < my_array.size; ++i) { */
     /*     printf("%f\n", my_array.data[i]); */
@@ -242,7 +279,9 @@ main()
 
     //print_dynamic_array(my_array);
 
-    printf("%f\n", median(my_array));
+    //printf("%f\n", median(my_array));
+
+    printf("%f\n", covariance(my_array, my_array2));
 
     free_dynamic_array(&my_array);
 

@@ -81,19 +81,10 @@ variance(struct DynamicArray arr, enum VarianceType type)
 double
 standard_deviation(struct DynamicArray arr, enum VarianceType type)
 {
-    if (type == SAMPLE)
-    {
-        return sqrt(variance(arr, SAMPLE));;
-    }
-    else if(type == POPULATION)
-    {
-        return sqrt(variance(arr, POPULATION));;
-    }
+    if(type == SAMPLE)
+        return sqrt(variance(arr, SAMPLE));
     else
-    {
-        fprintf(stderr, "Invalid variance type\n");
-        exit(EXIT_FAILURE);
-    }
+        return sqrt(variance(arr, POPULATION));
 }
 
 void
@@ -198,7 +189,7 @@ median(struct DynamicArray arr)
 }
 
 double
-covariance(struct DynamicArray arr1, struct DynamicArray arr2)
+covariance(struct DynamicArray arr1, struct DynamicArray arr2, enum VarianceType type)
 {
     if(arr1.size != arr2.size)
     {
@@ -212,13 +203,13 @@ covariance(struct DynamicArray arr1, struct DynamicArray arr2)
 
     double result = 0;
 
-    for(size_t i = 0; i < arr1.size; ++i) {
+    for(size_t i = 0; i < arr1.size; ++i)
         result += (arr1.data[i] - mean_arr1) * (arr2.data[i] - mean_arr2);
-    }
 
-    // TODO:
-    // This is for sample covariance, implement the enum flag to switch with population.
-    return result / (double)(arr1.size - 1);
+    if(type == SAMPLE)
+        return result / (double)(arr1.size - 1);
+    else
+        return result / (double)(arr1.size);
 }
 
 int
@@ -270,7 +261,7 @@ main()
 
     //printf("%f\n", median(my_array));
 
-    printf("%f\n", covariance(my_array, my_array2));
+    printf("%f\n", covariance(my_array, my_array2, SAMPLE));
 
     free_dynamic_array(&my_array);
 

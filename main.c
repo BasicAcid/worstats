@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 struct DynamicArray
 {
@@ -37,6 +36,28 @@ free_dynamic_array(struct DynamicArray *arr)
 {
     free(arr->data);
     arr->size = 0;
+}
+
+// TODO
+// Newton Raphson implementation
+double
+sqrt(double input, double epsilon)
+{
+    double x = input / 2;
+
+    while(abs(x * x - input) > epsilon)
+    {
+        x = 0.5 * (x + input / x);
+    }
+
+    return x;
+}
+
+// TODO: Implement pow
+double
+pow(double value, double exponent)
+{
+
 }
 
 double
@@ -173,6 +194,9 @@ merge_sort_dynamic(struct DynamicArray *arr)
         merge_sort(arr->data, 0, arr->size - 1);
 }
 
+// TODO
+// Implement quicksort
+
 double
 median(struct DynamicArray arr)
 {
@@ -210,6 +234,13 @@ covariance(struct DynamicArray arr1, struct DynamicArray arr2, enum VarianceType
         return result / (double)(arr1.size - 1);
     else
         return result / (double)(arr1.size);
+}
+
+// TODO
+double
+pearson()
+{
+
 }
 
 int

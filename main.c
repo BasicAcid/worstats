@@ -49,8 +49,6 @@ dabs(double num)
         return num;
 }
 
-
-// TODO
 // Newton Raphson implementation
 double
 sqrt(double input, double epsilon)
@@ -65,12 +63,16 @@ sqrt(double input, double epsilon)
     return x;
 }
 
-// TODO: Implement pow
-/* double */
-/* pow(double value, double exponent) */
-/* { */
+double
+pow(double value, double exponent)
+{
+    double result = 1;
 
-/* } */
+    for(int i = 0; i < exponent; i++)
+        result *= value;
+
+    return result;
+}
 
 double
 mean(struct DynamicArray arr)
@@ -85,31 +87,20 @@ mean(struct DynamicArray arr)
     return mean;
 }
 
-/* double */
-/* variance(struct DynamicArray arr, enum VarianceType type) */
-/* { */
-/*     double array_mean = mean(arr); */
-/*     double result = 0; */
+double
+variance(struct DynamicArray arr, enum VarianceType type)
+{
+    double array_mean = mean(arr);
+    double result = 0;
 
-/*     for(size_t i = 0; i < arr.size; i++) */
-/*     { */
-/*         result += pow(arr.data[i] - array_mean, 2); */
-/*     } */
+    for(size_t i = 0; i < arr.size; i++)
+        result += pow(arr.data[i] - array_mean, 2);
 
-/*     if(type == SAMPLE) */
-/*     { */
-/*         return result / (double)(arr.size - 1); */
-/*     } */
-/*     else if(type == POPULATION) */
-/*     { */
-/*         return result / (double)arr.size; */
-/*     } */
-/*     else */
-/*     { */
-/*         fprintf(stderr, "Invalid variance type\n"); */
-/*         exit(EXIT_FAILURE); */
-/*     } */
-/* } */
+    if(type == SAMPLE)
+        return result / (double)(arr.size - 1);
+    else
+        return result / (double)arr.size;
+}
 
 /* double */
 /* standard_deviation(struct DynamicArray arr, enum VarianceType type) */
@@ -280,14 +271,14 @@ main()
     /*     printf("%f\n", my_array.data[i]); */
     /* } */
 
-    /* double test_mean = mean(my_array); */
-    /* printf("%f\n", test_mean); */
+    double test_mean = mean(my_array);
+    printf("%f\n", test_mean);
 
-    /* double s_variance = variance(my_array, SAMPLE); */
-    /* printf("%f\n", s_variance); */
+    double s_variance = variance(my_array, SAMPLE);
+    printf("%f\n", s_variance);
 
-    /* double p_variance = variance(my_array, POPULATION); */
-    /* printf("%f\n", p_variance); */
+    double p_variance = variance(my_array, POPULATION);
+    printf("%f\n", p_variance);
 
     /* double test_std_sample = standard_deviation(my_array, SAMPLE); */
     /* printf("%f\n", test_std_sample); */
@@ -304,9 +295,9 @@ main()
 
     //printf("%f\n", median(my_array));
 
-    printf("%f\n", sqrt(5.0, 0.0001));
+    /* printf("%f\n", sqrt(5.0, 0.0001)); */
 
-    printf("%f\n", covariance(my_array, my_array2, SAMPLE));
+    /* printf("%f\n", covariance(my_array, my_array2, SAMPLE)); */
 
     free_dynamic_array(&my_array);
 

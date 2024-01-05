@@ -38,6 +38,18 @@ free_dynamic_array(struct DynamicArray *arr)
     arr->size = 0;
 }
 
+// Absolute value for doubles.
+// TODO: find a better method.
+double
+dabs(double num)
+{
+    if (num < 0)
+        return -num;
+    else
+        return num;
+}
+
+
 // TODO
 // Newton Raphson implementation
 double
@@ -45,7 +57,7 @@ sqrt(double input, double epsilon)
 {
     double x = input / 2;
 
-    while(abs(x * x - input) > epsilon)
+    while(dabs(x * x - input) > epsilon)
     {
         x = 0.5 * (x + input / x);
     }
@@ -54,11 +66,11 @@ sqrt(double input, double epsilon)
 }
 
 // TODO: Implement pow
-double
-pow(double value, double exponent)
-{
+/* double */
+/* pow(double value, double exponent) */
+/* { */
 
-}
+/* } */
 
 double
 mean(struct DynamicArray arr)
@@ -73,40 +85,40 @@ mean(struct DynamicArray arr)
     return mean;
 }
 
-double
-variance(struct DynamicArray arr, enum VarianceType type)
-{
-    double array_mean = mean(arr);
-    double result = 0;
+/* double */
+/* variance(struct DynamicArray arr, enum VarianceType type) */
+/* { */
+/*     double array_mean = mean(arr); */
+/*     double result = 0; */
 
-    for(size_t i = 0; i < arr.size; i++)
-    {
-        result += pow(arr.data[i] - array_mean, 2);
-    }
+/*     for(size_t i = 0; i < arr.size; i++) */
+/*     { */
+/*         result += pow(arr.data[i] - array_mean, 2); */
+/*     } */
 
-    if(type == SAMPLE)
-    {
-        return result / (double)(arr.size - 1);
-    }
-    else if(type == POPULATION)
-    {
-        return result / (double)arr.size;
-    }
-    else
-    {
-        fprintf(stderr, "Invalid variance type\n");
-        exit(EXIT_FAILURE);
-    }
-}
+/*     if(type == SAMPLE) */
+/*     { */
+/*         return result / (double)(arr.size - 1); */
+/*     } */
+/*     else if(type == POPULATION) */
+/*     { */
+/*         return result / (double)arr.size; */
+/*     } */
+/*     else */
+/*     { */
+/*         fprintf(stderr, "Invalid variance type\n"); */
+/*         exit(EXIT_FAILURE); */
+/*     } */
+/* } */
 
-double
-standard_deviation(struct DynamicArray arr, enum VarianceType type)
-{
-    if(type == SAMPLE)
-        return sqrt(variance(arr, SAMPLE));
-    else
-        return sqrt(variance(arr, POPULATION));
-}
+/* double */
+/* standard_deviation(struct DynamicArray arr, enum VarianceType type) */
+/* { */
+/*     if(type == SAMPLE) */
+/*         return sqrt(variance(arr, SAMPLE), 0.001); */
+/*     else */
+/*         return sqrt(variance(arr, POPULATION), 0.001); */
+/* } */
 
 void
 merge(double arr[], size_t left, size_t middle, size_t right)
@@ -237,11 +249,11 @@ covariance(struct DynamicArray arr1, struct DynamicArray arr2, enum VarianceType
 }
 
 // TODO
-double
-pearson()
-{
+/* double */
+/* pearson() */
+/* { */
 
-}
+/* } */
 
 int
 main()
@@ -291,6 +303,8 @@ main()
     //print_dynamic_array(my_array);
 
     //printf("%f\n", median(my_array));
+
+    printf("%f\n", sqrt(5.0, 0.0001));
 
     printf("%f\n", covariance(my_array, my_array2, SAMPLE));
 

@@ -14,8 +14,6 @@ CFLAGS := -O2 \
           -Wconversion \
           -g
 
-LIBS = -lm
-
 SRC := main.c
 TARGET := bin/main
 INSTALL_DIR := ~/.local/bin

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// See for optimizations:
+// https://youtu.be/443UNeGrFoM?si=4PzWk8W_bN0BQHEF&t=6325
 struct DynamicArray
 {
     double *data;
@@ -26,9 +28,7 @@ void
 print_dynamic_array(struct DynamicArray arr)
 {
     for(size_t i = 0; i < arr.size; i++)
-    {
         printf("%f\n", arr.data[i]);
-    }
 }
 
 void
@@ -102,14 +102,14 @@ variance(struct DynamicArray arr, enum VarianceType type)
         return result / (double)arr.size;
 }
 
-/* double */
-/* standard_deviation(struct DynamicArray arr, enum VarianceType type) */
-/* { */
-/*     if(type == SAMPLE) */
-/*         return sqrt(variance(arr, SAMPLE), 0.001); */
-/*     else */
-/*         return sqrt(variance(arr, POPULATION), 0.001); */
-/* } */
+double
+standard_deviation(struct DynamicArray arr, enum VarianceType type)
+{
+    if(type == SAMPLE)
+        return sqrt(variance(arr, SAMPLE), 0.001);
+    else
+        return sqrt(variance(arr, POPULATION), 0.001);
+}
 
 void
 merge(double arr[], size_t left, size_t middle, size_t right)
@@ -170,9 +170,6 @@ merge(double arr[], size_t left, size_t middle, size_t right)
 void
 merge_sort(double arr[], size_t left, size_t right)
 {
-    /* printf("Left: %d\n", (int)left); */
-    /* printf("Right: %d\n", (int)right); */
-
     if(left < right)
     {
         // Better?
@@ -239,6 +236,25 @@ covariance(struct DynamicArray arr1, struct DynamicArray arr2, enum VarianceType
         return result / (double)(arr1.size);
 }
 
+unsigned int
+fact(unsigned int x)
+{
+    unsigned int result = 1;
+
+    for(unsigned int i = x; i >= 1; i--)
+        result *= i;
+
+    return result;
+}
+
+double
+permutations()
+{}
+
+double
+combinations()
+{}
+
 // TODO
 /* double */
 /* pearson() */
@@ -249,6 +265,9 @@ covariance(struct DynamicArray arr1, struct DynamicArray arr2, enum VarianceType
 int
 main()
 {
+    // TODO
+    // Move all of this to a dedicated test file.
+
     size_t initial_size = 6;
     struct DynamicArray my_array = create_dynamic_array(initial_size);
     struct DynamicArray my_array2 = create_dynamic_array(initial_size);
@@ -267,10 +286,6 @@ main()
     my_array2.data[4] = 5;
     my_array2.data[5] = 53;
 
-    /* for (size_t i = 0; i < my_array.size; ++i) { */
-    /*     printf("%f\n", my_array.data[i]); */
-    /* } */
-
     double test_mean = mean(my_array);
     printf("%f\n", test_mean);
 
@@ -280,12 +295,11 @@ main()
     double p_variance = variance(my_array, POPULATION);
     printf("%f\n", p_variance);
 
-    /* double test_std_sample = standard_deviation(my_array, SAMPLE); */
-    /* printf("%f\n", test_std_sample); */
+    double test_std_sample = standard_deviation(my_array, SAMPLE);
+    printf("%f\n", test_std_sample);
 
-    /* double test_std_pop = standard_deviation(my_array, POPULATION); */
-    /* printf("%f\n", test_std_pop); */
-
+    double test_std_pop = standard_deviation(my_array, POPULATION);
+    printf("%f\n", test_std_pop);
 
     //split_merge_sort(my_array);
 

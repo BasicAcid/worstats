@@ -87,6 +87,9 @@ mean(struct DynamicArray arr)
     return mean;
 }
 
+// TODO
+// Implement geometric mean.
+
 double
 variance(struct DynamicArray arr, enum VarianceType type)
 {
@@ -247,13 +250,19 @@ fact(unsigned int x)
     return result;
 }
 
-double
-permutations()
-{}
+// TODO
+/* double */
+/* permutations(unsigned int a, unsigned int b) */
+/* { */
 
-double
-combinations()
-{}
+/* } */
+
+// TODO
+/* double */
+/* combinations() */
+/* { */
+
+/* } */
 
 // TODO
 /* double */
@@ -261,6 +270,20 @@ combinations()
 /* { */
 
 /* } */
+
+double
+mean_square_error(struct DynamicArray arr, struct DynamicArray arr2)
+{
+    double result = 0;
+
+    for(unsigned int i = 0; i < arr.size; i++)
+        result += (arr.data[i] - arr2.data[i]) * (arr.data[i] - arr2.data[i]);
+
+    return result / arr.size;
+}
+
+// TODO
+// Implement MAE
 
 int
 main()
@@ -272,7 +295,7 @@ main()
     struct DynamicArray my_array = create_dynamic_array(initial_size);
     struct DynamicArray my_array2 = create_dynamic_array(initial_size);
 
-    my_array.data[0] = 1;
+    my_array.data[0] = 0;
     my_array.data[1] = 2;
     my_array.data[2] = 3;
     my_array.data[3] = 4;
@@ -284,7 +307,7 @@ main()
     my_array2.data[2] = 3;
     my_array2.data[3] = 4;
     my_array2.data[4] = 5;
-    my_array2.data[5] = 53;
+    my_array2.data[5] = 1;
 
     double test_mean = mean(my_array);
     printf("%f\n", test_mean);
@@ -301,6 +324,9 @@ main()
     double test_std_pop = standard_deviation(my_array, POPULATION);
     printf("%f\n", test_std_pop);
 
+    double test_msr = mean_square_error(my_array, my_array2);
+    printf("%f\n", test_msr);
+
     //split_merge_sort(my_array);
 
     //merge_sort_dynamic(&my_array);
@@ -309,7 +335,7 @@ main()
 
     //printf("%f\n", median(my_array));
 
-    /* printf("%f\n", sqrt(5.0, 0.0001)); */
+    printf("%f\n", sqrt(5.0, 0.0001));
 
     /* printf("%f\n", covariance(my_array, my_array2, SAMPLE)); */
 

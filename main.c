@@ -279,11 +279,19 @@ mean_square_error(struct DynamicArray arr, struct DynamicArray arr2)
     for(unsigned int i = 0; i < arr.size; i++)
         result += (arr.data[i] - arr2.data[i]) * (arr.data[i] - arr2.data[i]);
 
-    return result / arr.size;
+    return result / (double)arr.size;
 }
 
-// TODO
-// Implement MAE
+double
+mean_absolute_error(struct DynamicArray arr, struct DynamicArray arr2)
+{
+    double result = 0;
+
+    for(unsigned int i = 0; i < arr.size; i++)
+        result += dabs(arr.data[i] - arr2.data[i]);
+
+    return result / (double)arr.size;
+}
 
 int
 main()

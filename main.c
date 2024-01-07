@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// TODO
+// Do not use size_t on anything but memory allocations.
+// So remove it from loops.
+
 // See for optimizations:
 // https://youtu.be/443UNeGrFoM?si=4PzWk8W_bN0BQHEF&t=6325
 struct DynamicArray
@@ -271,6 +275,10 @@ fact(unsigned int x)
 
 /* } */
 
+// TODO
+// Add function that generate arrays of numbers based on
+// probability distribution (uniform, normal, etc).
+
 double
 mean_square_error(struct DynamicArray arr, struct DynamicArray arr2)
 {
@@ -348,6 +356,7 @@ main()
     /* printf("%f\n", covariance(my_array, my_array2, SAMPLE)); */
 
     free_dynamic_array(&my_array);
+    free_dynamic_array(&my_array2);
 
     return 0;
 }

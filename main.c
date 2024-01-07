@@ -23,7 +23,7 @@ struct DynamicArray
 create_dynamic_array(size_t size)
 {
     struct DynamicArray arr;
-    arr.data = (double *)malloc(size * sizeof(double));
+    arr.data = (double *)malloc(size * sizeof(arr));
     arr.size = size;
     return arr;
 }

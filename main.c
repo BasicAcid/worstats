@@ -276,19 +276,20 @@ fact(unsigned int x)
 // Add function that generate arrays of numbers based on
 // probability distribution (uniform, normal, etc).
 
-// Generate a random number between 0 and 1.
-double
-uniform_rand()
-{
-    srand((unsigned int)time(NULL)); // Seed.
-    double rand_nb = (double)rand() / RAND_MAX;
-    return rand_nb;
-}
-
 struct DynamicArray
-uniform_array()
+uniform_array(long unsigned int size)
 {
+    struct DynamicArray arr;
+    arr.data = malloc(size * sizeof(arr));
+    arr.size = size;
 
+    srand((unsigned int)time(NULL)); // Seed.
+
+    for (long unsigned int i = 0; i < size; i++) {
+        arr.data[i] = (double)rand() / RAND_MAX;
+    }
+
+    return arr;
 }
 
 double
@@ -370,7 +371,7 @@ main()
     free_dynamic_array(&my_array);
     free_dynamic_array(&my_array2);
 
-    uniform_rand();
+    uniform_array(10);
 
     return 0;
 }

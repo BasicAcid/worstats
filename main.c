@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-// TODO
-// Do not use size_t on anything but memory allocations.
-// So remove it from loops.
+#include <time.h>
 
 // See for optimizations:
 // https://youtu.be/443UNeGrFoM?si=4PzWk8W_bN0BQHEF&t=6325
@@ -279,6 +276,21 @@ fact(unsigned int x)
 // Add function that generate arrays of numbers based on
 // probability distribution (uniform, normal, etc).
 
+// Generate a random number between 0 and 1.
+double
+uniform_rand()
+{
+    srand((unsigned int)time(NULL)); // Seed.
+    double rand_nb = (double)rand() / RAND_MAX;
+    return rand_nb;
+}
+
+struct DynamicArray
+uniform_array()
+{
+
+}
+
 double
 mean_square_error(struct DynamicArray arr, struct DynamicArray arr2)
 {
@@ -357,6 +369,8 @@ main()
 
     free_dynamic_array(&my_array);
     free_dynamic_array(&my_array2);
+
+    uniform_rand();
 
     return 0;
 }

@@ -293,6 +293,26 @@ uniform_array(long unsigned int size)
 }
 
 double
+log(double x)
+{
+    int precision = 15;
+    double result = x;
+    double term = x;
+
+    for (int i = 1; i <= precision; ++i) {
+        result += term;
+        term *= (x - 1.0) / i;
+    }
+
+    return result;
+}
+
+void box_muller_transform(double u1, double u2)
+{
+    // log(u1);
+}
+
+double
 mean_square_error(struct DynamicArray arr, struct DynamicArray arr2)
 {
     double result = 0;

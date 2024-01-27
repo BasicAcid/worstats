@@ -16,7 +16,6 @@ CFLAGS := -O2 \
 
 SRC := main.c
 TARGET := bin/main
-INSTALL_DIR := ~/.local/bin
 
 .PHONY: build deploy
 
@@ -27,11 +26,6 @@ create_dir:
 
 $(TARGET): $(SRC)
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
-
-deploy: $(INSTALL_DIR)/tagger
-
-$(INSTALL_DIR)/tagger: $(SRC)
-	$(CC) $(CFLAGS) -o $@ $^
 
 run: build
 	$(TARGET)

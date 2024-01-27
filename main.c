@@ -292,6 +292,7 @@ uniform_array(long unsigned int size)
     return arr;
 }
 
+// Natural log.
 double
 log(double x)
 {

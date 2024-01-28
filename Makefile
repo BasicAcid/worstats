@@ -12,19 +12,20 @@ CFLAGS := -O2 \
           -fno-common \
           -z noexecstack \
           -Wconversion \
+	  -Wno-builtin-declaration-mismatch \
           -g
 
-SRC := main.c
+SRC := main.c tests.c
 TARGET := bin/main
 
-.PHONY: build deploy
+.PHONY: build
 
 build: create_dir $(TARGET)
 
 create_dir:
 	mkdir -p bin
 
-$(TARGET): $(SRC)
+$(TARGET): $(SRC) main.h
 	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 run: build

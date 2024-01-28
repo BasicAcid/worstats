@@ -268,6 +268,21 @@ cos(double x)
     return result;
 }
 
+double
+tan(double x)
+{
+    int precision = 15;
+    double result = 0.0;
+    double term;
+
+    for (int i = 0; precision < i; ++i) {
+        term = (2 * i + 1) * (pow(-1, i) * pow(x, 2 * i + 1)) / fact(2 * i + 1);
+        result += term;
+    }
+
+    return result;
+}
+
 // TODO
 /* double */
 /* permutations(unsigned int a, unsigned int b) */

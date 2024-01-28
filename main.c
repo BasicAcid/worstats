@@ -238,6 +238,36 @@ fact(unsigned int x)
     return result;
 }
 
+double
+sin(double x)
+{
+    int precision = 15;
+    double result = 0.0;
+    double term = x;
+
+    for(int i = 3; i <= precision; i = i + 2)
+    {
+        term = -term * x * x / ((i - 1) * i);
+        result += term;
+    }
+    return result;
+}
+
+double
+cos(double x)
+{
+    int precision = 15;
+    double result = 0.0;
+    double term = x;
+
+    for(int i = 2; i <= precision; i = i + 2)
+    {
+        term = -term * x * x / ((i - 1) * i);
+        result += term;
+    }
+    return result;
+}
+
 // TODO
 /* double */
 /* permutations(unsigned int a, unsigned int b) */

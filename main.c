@@ -271,11 +271,11 @@ cos(double x)
 double
 tan(double x)
 {
-    int precision = 15;
+    unsigned int precision = 15;
     double result = 0.0;
     double term;
 
-    for (int i = 0; precision < i; ++i) {
+    for(unsigned int i = 0; precision < i; ++i) {
         term = (2 * i + 1) * (pow(-1, i) * pow(x, 2 * i + 1)) / fact(2 * i + 1);
         result += term;
     }

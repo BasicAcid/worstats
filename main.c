@@ -294,7 +294,6 @@ tan(double x)
 /* double */
 /* combinations() */
 /* { */
-
 /* } */
 
 // TODO

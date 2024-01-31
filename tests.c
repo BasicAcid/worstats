@@ -1,6 +1,101 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "main.h"
+
+void
+test_dabs()
+{
+    double x = -1.0;
+    assert(dabs(x) == 1.0);
+}
+
+void
+test_sqrt()
+{
+    assert( dabs(sqrt(2, 0.001) - 1.414216) < 1e-6);
+}
+
+void
+test_pow()
+{
+    assert( pow(2, 3) == 8);
+}
+
+void test_mean()
+{
+    struct DynamicArray arr = create_dynamic_array(5);
+    arr.data[0] = 1;
+    arr.data[1] = 2;
+    arr.data[2] = 3;
+    arr.data[3] = 4;
+    arr.data[4] = 5;
+
+    double expected = 3;
+    double actual = mean(arr);
+
+    assert(dabs(expected - actual) < 0.00001);
+
+    free(arr.data);
+}
+
+void test_variance()
+{
+
+}
+
+void test_std()
+{
+
+}
+
+void test_median()
+{
+
+}
+
+void test_covariance()
+{
+
+}
+
+void test_fact()
+{
+
+}
+
+void test_sin()
+{
+
+}
+
+
+void test_cos()
+{
+
+}
+
+void test_tan()
+{
+
+}
+
+void test_log()
+{
+
+}
+
+void test_msr()
+{
+
+}
+
+void test_mas()
+{
+
+}
+
+
 
 void
 tests()

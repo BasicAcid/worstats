@@ -44,9 +44,7 @@ sqrt(double input, double epsilon)
     double x = input / 2;
 
     while(dabs(x * x - input) > epsilon)
-    {
         x = 0.5 * (x + input / x);
-    }
 
     return x;
 }
@@ -275,11 +273,11 @@ tan(double x)
     double result = 0.0;
     double term;
 
-    for(unsigned int i = 0; precision < i; ++i) {
+    for(unsigned int i = 0; precision < i; ++i)
+    {
         term = (2 * i + 1) * (pow(-1, i) * pow(x, 2 * i + 1)) / fact(2 * i + 1);
         result += term;
     }
-
     return result;
 }
 
@@ -370,6 +368,10 @@ mean_absolute_error(struct DynamicArray arr, struct DynamicArray arr2)
 int
 main()
 {
+    test_dabs();
+    test_sqrt();
+    test_pow();
+    test_mean();
 
     return 0;
 }
